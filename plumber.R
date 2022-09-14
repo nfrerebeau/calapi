@@ -11,28 +11,24 @@
 #
 
 library(plumber)
+oxcAAR::setOxcalExecutablePath("OxCal/bin/OxCalLinux")
 
-#* @apiTitle Plumber Example API
+#* @apiTitle 14C Calibration API
 
-#* Echo back the input
-#* @param msg The message to echo
-#* @get /echo
-function(msg=""){
-  list(msg = paste0("The message is: '", msg, "'"))
+#* Calibrates a 14C Date Using OxCal
+#* @param names A `character` vector giving the names of the date (e.g. laboratory codes).
+#* @param dates A `numeric` vector giving the BP dates that should be calibrated.
+#* @param errors A `numeric` vector giving the standard deviation that should be calibrated
+#* @get /oxcal/calibrate
+function(names, dates, errors){
+  rdates <- oxcAAR::oxcalCalibrate(as.numeric(dates), as.numeric(errors), names)
+  oxcAAR::get_sigma_ranges(rdates)
 }
 
-#* Plot a histogram
+#* Plot a 14C Date Using OxCal
 #* @serializer png
-#* @get /plot
-function(){
-  rand <- rnorm(100)
-  hist(rand)
-}
-
-#* Return the sum of two numbers
-#* @param a The first number to add
-#* @param b The second number to add
-#* @post /sum
-function(a, b){
-  as.numeric(a) + as.numeric(b)
+#* @get /oxcal/plot
+function(names, dates, errors){
+  rdates <- oxcAAR::oxcalCalibrate(as.numeric(dates), as.numeric(errors), names)
+  plot(rdates)
 }
