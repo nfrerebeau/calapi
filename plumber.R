@@ -16,6 +16,15 @@ oxcAAR::setOxcalExecutablePath("OxCal/bin/OxCalLinux")
 
 memoise_oxcal_calibrate <- memoise::memoise(oxcAAR::oxcalCalibrate)
 
+#* Log some information about the incoming request
+#* @filter logger
+function(req){
+  cat(as.character(Sys.time()), "-",
+      req$REQUEST_METHOD, req$PATH_INFO, "-",
+      req$HTTP_USER_AGENT, "@", req$REMOTE_ADDR, "\n")
+  forward()
+}
+
 #* @apiTitle 14C Calibration API
 #* @apiLicense list(name = "GNU-GPL 3.0", url = "https://www.gnu.org/licenses/gpl-3.0.en.html")
 #* @apiVersion 0.0.0.9000
