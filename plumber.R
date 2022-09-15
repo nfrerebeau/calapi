@@ -12,7 +12,7 @@
 
 library(plumber)
 
-oxcAAR::setOxcalExecutablePath("OxCal/bin/OxCalLinux")
+oxcAAR::setOxcalExecutablePath("bin/OxCalLinux")
 
 memoise_oxcal_calibrate <- memoise::memoise(oxcAAR::oxcalCalibrate)
 
