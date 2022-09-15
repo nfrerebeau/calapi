@@ -30,4 +30,4 @@ root <- pr("plumber.R")
 root |> pr_run(port = 8000)
 ```
 
-The API should be running on your computer on port 8000. You should be able to open http://localhost:8000/oxcal/calibrate?dates=5000&errors=25&names=KIA-12345 or http://localhost:8000/oxcal/plot?dates=5000&errors=25&names=KIA-12345 in a web browser to test the API endpoints.
+The API should be running on your computer on port 8000. You should be able to open http://localhost:8000/oxcal/calibrate?dates=5000&errors=25&names=KIA-12345, http://localhost:8000/oxcal/calibrate/ranges?dates=5000&errors=25&names=KIA-12345 or http://localhost:8000/oxcal/calibrate/plot?dates=5000&errors=25&names=KIA-12345 in a web browser to test the API endpoints.
