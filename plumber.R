@@ -17,11 +17,13 @@ oxcAAR::setOxcalExecutablePath("OxCal/bin/OxCalLinux")
 memoise_oxcal_calibrate <- memoise::memoise(oxcAAR::oxcalCalibrate)
 
 #* @apiTitle 14C Calibration API
+#* @apiLicense list(name = "GNU-GPL 3.0", url = "https://www.gnu.org/licenses/gpl-3.0.en.html")
+#* @apiVersion 0.0.0.9000
 
 #* Calibrates a 14C Date Using OxCal
-#* @param names A `character` vector giving the names of the date (e.g. laboratory codes).
-#* @param dates A `numeric` vector giving the BP dates that should be calibrated.
-#* @param errors A `numeric` vector giving the standard deviation that should be calibrated
+#* @param names:[str] The names of the date (e.g. laboratory codes).
+#* @param dates:[dbl] The BP dates that should be calibrated.
+#* @param errors:[dbl] The standard deviation that should be calibrated.
 #* @serializer print
 #* @get /oxcal/calibrate
 function(names, dates, errors){
@@ -30,9 +32,9 @@ function(names, dates, errors){
 }
 
 #* Calibrates a 14C Date Using OxCal
-#* @param names A `character` vector giving the names of the date (e.g. laboratory codes).
-#* @param dates A `numeric` vector giving the BP dates that should be calibrated.
-#* @param errors A `numeric` vector giving the standard deviation that should be calibrated
+#* @param names:[str] The names of the date (e.g. laboratory codes).
+#* @param dates:[dbl] The BP dates that should be calibrated.
+#* @param errors:[dbl] The standard deviation that should be calibrated.
 #* @get /oxcal/calibrate/ranges
 function(names, dates, errors){
   rdates <- memoise_oxcal_calibrate(as.numeric(dates), as.numeric(errors), names)
@@ -40,6 +42,9 @@ function(names, dates, errors){
 }
 
 #* Plot a 14C Date Using OxCal
+#* @param names:[str] The names of the date (e.g. laboratory codes).
+#* @param dates:[dbl] The BP dates that should be calibrated.
+#* @param errors:[dbl] The standard deviation that should be calibrated.
 #* @serializer png
 #* @get /oxcal/calibrate/plot
 function(names, dates, errors){
